@@ -30,7 +30,7 @@ public class SkillController {
     public String displayAddSkillForm(Model model) {
         model.addAttribute("title", "Add Skill");
         model.addAttribute(new Skill());
-        model.addAttribute("skills", skillRepository.findAll());
+        //model.addAttribute("skills", skillRepository.findAll());
         return "skills/add";
     }
 
