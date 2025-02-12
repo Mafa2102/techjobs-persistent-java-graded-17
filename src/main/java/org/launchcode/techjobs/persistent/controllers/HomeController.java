@@ -40,32 +40,27 @@ public class HomeController {
         return "index";
     }
 
+    
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
-	model.addAttribute("title", "Add Job");
+        model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
-//        List employers = (List<Employer>) employerRepository.findAll();
-//        model.addAttribute("employers", employers);
         model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam int employerId,
+                                    Errors errors, Model model, @RequestParam int employerId,
                                     @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
-	    model.addAttribute("title", "Add Job");
-        //model.addAttribute(new Job());
-        //model.addAttribute("employers", employerRepository.findAll());
-//            List employers = (List<Employer>) employerRepository.findAll();
-//            model.addAttribute("employers", employers);
+            model.addAttribute("title", "Add Job");
             return "add";
         }
-        Optional <Employer> employer = employerRepository.findById(employerId);
-        if(employer.isPresent()){
+        Optional<Employer> employer = employerRepository.findById(employerId);
+        if (employer.isPresent()) {
             Employer newEmployer = employer.get();
             newJob.setEmployer(newEmployer);
         }
